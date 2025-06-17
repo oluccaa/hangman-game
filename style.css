@@ -306,47 +306,76 @@ body {
 
 /* RESPONSIVO */
 
-@media (max-width: 914px) {
-    .container-wrapper {
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
+/* 2) tablets & mobiles < 915px  (empilhado) -------------- */
+@media (max-width:914px){
+    .container-wrapper{
+        flex-direction:column;
+        align-items:stretch;
+        gap:30px;
+        padding:30px 15px;
     }
+    .container{
+        flex-direction:column;                    /* forca em cima, teclado embaixo */
+        align-items:center;
+        justify-content:flex-start;
+        gap:35px;
+        padding:40px 20px;
+    }
+    .hangman-box img{
+        max-width:220px;}
+    .hangman-box h1{
+        font-size:1.2rem;}
 
-    .container {
-        flex-direction: column;
-        align-items: center;
-        padding: 30px 20px;
-        gap: 40px;
-    }
+    /* letras um pouquinho menores */
+    .word-display .letter{
+        font-size:1.6rem;
+        width:25px;}
 
-    .hangman-box img {
-        max-width: 220px;
-    }
-
-    .hangman-box h1 {
-        font-size: 1.2rem;
-    }
-    .menu{
-        width: 100%
+    /* botões adaptáveis */
+    .keyboard button,
+    .accent button{
+        width:calc(100% / 8 - 5px);
+        font-size:.95rem;
     }
 }
 
-@media (max-width: 480px) {
-    .keyboard button {
-        width: calc(100% / 6 - 5px);
-        font-size: 0.9rem;
+/* 3) smartphones < 600px  -------------------------------- */
+@media (max-width:600px){
+    .container{
+        padding:30px 15px;
+        gap:28px;
     }
 
-    #start-btn {
-        width: 100%;
-        max-width: 250px;
+    #category-buttons button{
+        font-size:.95rem;
+        padding: 10px;
     }
 
-    .game-modal .content {
-        padding: 20px;
+    .keyboard button,
+    .accent button{
+        width:calc(100% / 6 - 5px);
+        font-size:.85rem;}
+}
+
+/* 4) smartphones muito pequenos < 360px  ----------------- */
+@media (max-width:360px){
+    .word-display .letter{
+    font-size:1.2rem;
+    width:15px;
+    margin: 20px;
+}
+    .keyboard button,
+    .accent button{
+        width:calc(100% / 5 - 5px);
+        font-size:.8rem;
+        padding:5px;
     }
-    .menu{
-        width: 100%
+    #start-btn{
+        width:100%;
+        font-size:.9rem;
+        padding:8px 16px;
+    }
+    .game-modal .content{
+        padding:20px;
     }
 }
