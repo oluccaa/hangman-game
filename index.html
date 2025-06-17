@@ -9,6 +9,16 @@
     <script src="scripts/script.js" defer></script>
 </head>
 <body>
+    <div class="game-modal">
+        <div class="content">
+            <img src="./images/lost.gif" alt="">
+            <h4>Game over</h4>
+            <p>The correct word was: <b>rainbow</b></p>
+            <button class="play-again">
+                Play again
+            </button>
+        </div>
+    </div>
     <div class="container">
         <div class="hangman-box">
             <img src="./images/hangman-0.svg" alt="forca">
@@ -18,7 +28,7 @@
             <ul class="word-display">
                 <li class="letter"></li>
                 <li class="letter"></li>
-                <li class="letter"></li>
+                <li class="letter guessed">A</li>
                 <li class="letter"></li>
                 <li class="letter"></li>
                 <li class="letter"></li>
