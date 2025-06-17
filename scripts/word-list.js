@@ -1,0 +1,122 @@
+const wordCategories = { 
+    Animais: [
+        { word: "elefante", hint: "Gigante com tromba" },
+        { word: "girafa", hint: "Pescoçuda das savanas" },
+        { word: "canguru", hint: "Salta com bebê na bolsa" },
+        { word: "tubarão", hint: "Caçador dos oceanos" },
+        { word: "coruja", hint: "Vê no escuro e gira a cabeça" },
+        { word: "pinguim", hint: "Ave que anda de fraque" },
+        { word: "jacaré", hint: "Mordida potente nos rios" },
+        { word: "abelha", hint: "Faz mel e ama flores" },
+        { word: "onça", hint: "Felino ágil da floresta" },
+        { word: "golfinho", hint: "Sorridente dos mares" }
+    ],
+    Musica: [
+        { word: "violino", hint: "Cordas e arco, som suave" },
+        { word: "melodia", hint: "O que você canta" },
+        { word: "bateria", hint: "Marca o ritmo com batidas" },
+        { word: "sanfona", hint: "Sons do sertão" },
+        { word: "microfone", hint: "Amplifica sua voz" },
+        { word: "pandeiro", hint: "Brilha no samba" },
+        { word: "guitarra", hint: "Cordas elétricas do rock" },
+        { word: "refrão", hint: "Parte que gruda na cabeça" },
+        { word: "notas", hint: "A base de toda canção" },
+        { word: "harmonia", hint: "A beleza entre os acordes" }
+    ],
+    Disney: [
+        { word: "aladdin", hint: "Gênio e tapete mágico" },
+        { word: "mulan", hint: "Salvou a China disfarçada" },
+        { word: "moana", hint: "Desafiou o oceano" },
+        { word: "simba", hint: "O futuro rei leão" },
+        { word: "olaf", hint: "Ama abraços quentinhos" },
+        { word: "bambi", hint: "Cervinho da floresta" },
+        { word: "ariel", hint: "Sereia de cabelo vermelho" },
+        { word: "rapunzel", hint: "Torre e cabelos mágicos" },
+        { word: "cinderela", hint: "Sapatinho perdido no baile" },
+        { word: "mickey", hint: "Rato símbolo da Disney" }
+    ],
+    Esportes: [
+        { word: "futebol", hint: "Gols, torcida e paixão" },
+        { word: "basquete", hint: "Cestas de três pontos" },
+        { word: "natação", hint: "Estilo livre na piscina" },
+        { word: "corrida", hint: "Vence quem chega primeiro" },
+        { word: "xadrez", hint: "Rainha e rei no tabuleiro" },
+        { word: "vôlei", hint: "Bola sobre a rede" },
+        { word: "ciclismo", hint: "Pedais e velocidade" },
+        { word: "boxe", hint: "Nocaute no ringue" },
+        { word: "ginástica", hint: "Elasticidade e precisão" },
+        { word: "surfe", hint: "Domina as ondas" }
+    ],
+    Cores: [
+        { word: "vermelho", hint: "Cor da paixão e do sangue" },
+        { word: "azul", hint: "Cor do céu e do mar" },
+        { word: "verde", hint: "Cor da natureza viva" },
+        { word: "amarelo", hint: "Sol brilhante" },
+        { word: "roxo", hint: "Mistura de poder e mistério" },
+        { word: "laranja", hint: "Fruta e pôr do sol" },
+        { word: "rosa", hint: "Delicada e romântica" },
+        { word: "preto", hint: "Elegância e escuridão" },
+        { word: "branco", hint: "Pureza e todas as cores" },
+        { word: "cinza", hint: "Nem claro, nem escuro" }
+    ],
+    Comidas: [
+        { word: "pizza", hint: "Massa redonda e saborosa" },
+        { word: "lasanha", hint: "Camadas de sabor italiano" },
+        { word: "brigadeiro", hint: "Docinho de festa" },
+        { word: "sushi", hint: "Cru e enrolado com arte" },
+        { word: "hambúrguer", hint: "Clássico entre dois pães" },
+        { word: "churrasco", hint: "Carne assada na brasa" },
+        { word: "pastel", hint: "Crosta frita e recheio" },
+        { word: "coxinha", hint: "Frango em formato de gota" },
+        { word: "feijoada", hint: "Prato típico com feijão preto" },
+        { word: "bolo", hint: "Recheado e com cobertura" }
+    ],
+    Filmes: [
+        { word: "avatar", hint: "Azuis de outro planeta" },
+        { word: "titanic", hint: "Tragédia em alto-mar" },
+        { word: "matrix", hint: "Realidade ou simulação?" },
+        { word: "rocky", hint: "Lutador com coração de aço" },
+        { word: "frozen", hint: "Deixa o gelo te emocionar" },
+        { word: "interestelar", hint: "Buracos negros e tempo" },
+        { word: "vingadores", hint: "Heróis contra o mal" },
+        { word: "harry potter", hint: "Feitiços e cicatriz na testa" },
+        { word: "jurassic", hint: "Dinossauros ressuscitados" },
+        { word: "minions", hint: "Pequenos, amarelos e caóticos" }
+    ],
+    Paises: [
+        { word: "brasil", hint: "Verde e amarelo no futebol" },
+        { word: "japão", hint: "Tecnologia e tradição milenar" },
+        { word: "egito", hint: "Terra das pirâmides" },
+        { word: "canadá", hint: "Neve e folha vermelha" },
+        { word: "itália", hint: "Pizza, moda e história" },
+        { word: "frança", hint: "Torre e romance" },
+        { word: "alemanha", hint: "Engenharia e salsichas" },
+        { word: "méxico", hint: "Chapéus e pimenta" },
+        { word: "china", hint: "Dragões e muralha" },
+        { word: "austrália", hint: "Cangurus e praias" }
+    ],
+    Tecnologia: [
+        { word: "internet", hint: "Conectando o mundo todo" },
+        { word: "smartphone", hint: "Celular que faz tudo" },
+        { word: "robô", hint: "Máquina com 'vida'" },
+        { word: "programa", hint: "Código que executa tarefas" },
+        { word: "nuvem", hint: "Guarda seus arquivos invisivelmente" },
+        { word: "wi-fi", hint: "Sinal mágico para navegar" },
+        { word: "teclado", hint: "Com letras e atalhos" },
+        { word: "monitor", hint: "Janela do computador" },
+        { word: "drone", hint: "Voa e filma do alto" },
+        { word: "aplicativo", hint: "Pequeno programa no celular" }
+    ],
+    Profissoes: [
+        { word: "médico", hint: "Salva vidas com jaleco" },
+        { word: "professor", hint: "Mestre do conhecimento" },
+        { word: "engenheiro", hint: "Constrói o futuro" },
+        { word: "ator", hint: "Vive mil personagens" },
+        { word: "bombeiro", hint: "Herói entre as chamas" },
+        { word: "advogado", hint: "Defensor das leis" },
+        { word: "cantor", hint: "Voz que encanta" },
+        { word: "motorista", hint: "Leva e traz com habilidade" },
+        { word: "cozinheiro", hint: "Transforma ingredientes em arte" },
+        { word: "policial", hint: "Protege e serve" }
+    ]
+};
