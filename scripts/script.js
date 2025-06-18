@@ -1,188 +1,138 @@
-const wordCategories = { 
-    Animais: [
-        { word: "elefante", hint: "Gigante com tromba" },
-        { word: "girafa", hint: "Pescoçuda das savanas" },
-        { word: "canguru", hint: "Salta com bebê na bolsa" },
-        { word: "tubarão", hint: "Caçador dos oceanos" },
-        { word: "coruja", hint: "Vê no escuro e gira a cabeça" },
-        { word: "pinguim", hint: "Ave que anda de fraque" },
-        { word: "jacaré", hint: "Mordida potente nos rios" },
-        { word: "abelha", hint: "Faz mel e ama flores" },
-        { word: "onça", hint: "Felino ágil da floresta" },
-        { word: "golfinho", hint: "Sorridente dos mares" }
-    ],
-    Musica: [
-        { word: "violino", hint: "Cordas e arco, som suave" },
-        { word: "melodia", hint: "O que você canta" },
-        { word: "bateria", hint: "Marca o ritmo com batidas" },
-        { word: "sanfona", hint: "Sons do sertão" },
-        { word: "microfone", hint: "Amplifica sua voz" },
-        { word: "pandeiro", hint: "Brilha no samba" },
-        { word: "guitarra", hint: "Cordas elétricas do rock" },
-        { word: "refrão", hint: "Parte que gruda na cabeça" },
-        { word: "notas", hint: "A base de toda canção" },
-        { word: "harmonia", hint: "A beleza entre os acordes" }
-    ], 
-    Disney: [
-        { word: "bruno", hint: "Tem visões do futuro, mas ninguém pode falar sobre ele" },
-        { word: "zezé", hint: "Um bebê com mais poderes do que qualquer herói (Os Incríveis)" },
-        { word: "miguel", hint: "No mundo dos mortos com músicas e memórias familiares (Viva – A Vida é uma Festa)" },
-        { word: "woody", hint: "Personagem que lidera um grupo muito animado… de brinquedos!" },
-        { word: "elsa", hint: "Rainha com poderes congelantes" },
-        { word: "mike wazowski", hint: "Um olho só, e um excelente profissional em sustos" },
-        { word: "tiana", hint: "Sonha em ter seu próprio restaurante, mas um beijo muda tudo" },
-        { word: "ralph", hint: "Quebra tudo nos fliperamas, mas só quer ser reconhecido como um cara do bem" },
-        { word: "merida", hint: "Cabelos vermelhos e arco nas mãos" },
-        { word: "luca", hint: "Menino do mar que descobre a amizade na superfície" },
-        { word: "remy", hint: "Um rato chef que conquista Paris com talento e tempero" },
-        { word: "dumbo", hint: "Com suas orelhas voa alto" },
-        { word: "ariel", hint: "Troca o canto e a cauda por pernas e liberdade" },
-        { word: "tarzan", hint: "Cresceu entre cipós e gorilas" },
-        { word: "wendy", hint: "Voa para a Terra do Nunca e vira uma mãe" },
-        { word: "hércules", hint: "Força de um semideus, coração de herói — em busca de seu lugar" },
-        { word: "tinker bell", hint: "Pequena, brilhante… com pozinho mágico" },
-        { word: "rapunzel", hint: "Cabelos dourados e um ladrão de coração mole" },
-        { word: "judy hopps", hint: "Coelhinha policial com um caso a resolver (Zootopia)" },
-        { word: "agrabah", hint: "Cidade do Aladdin" },
-        { word: "arendelle", hint: "Reino de Elsa e Anna" },
-        { word: "pride lands", hint: "Terras do Rei Leão" },
-        { word: "ilha de motunui", hint: "Terra natal de Moana" },
-        { word: "floresta encantada", hint: "Além de Arendelle (Frozen II)" },
-        { word: "torre da rapunzel", hint: "Onde vive a princesa de cabelos mágicos" },
-        { word: "lâmpada mágica", hint: "Abriga o gênio" },
-        { word: "espelho mágico", hint: "Revela a verdade à rainha" },
-        { word: "varinha da fada madrinha", hint: "Transforma sonhos em realidade" },
-        { word: "sapatinho de cristal", hint: "Perdeu no baile" },
-        { word: "tridente de poseidon", hint: "Poder do oceano (A Pequena Sereia)" },
-        { word: "rosa encantada", hint: "Marca o tempo (A Bela e a Fera)" }
-    ],
+/* ---------- ELEMENTOS DOM PRINCIPAIS ---------- */
+const hangmanImage = document.querySelector(".hangman-box img");
+const wordDisplay = document.querySelector(".word-display");
+const guessesText = document.querySelector(".guesses-text b");
+const KeyboardDiv = document.querySelector(".keyboard");
+const AccentDiv = document.querySelector(".accent");
+const gameModal = document.querySelector(".game-modal");
+const playGame = document.querySelector(".play-again");
+const containerJogo = document.querySelector(".container")
+const categoryButtons = document.querySelectorAll(".category-buttons button");
+const startBtn = document.getElementById("start-btn");
+const menuOla = document.querySelector(".textoInicial")
+// Junta todas as palavras de todas as categorias
+const allWords = Object.values(wordCategories).flat();
+// Adiciona a categoria "Aleatório" ao objeto original
+wordCategories["Aleatorio"] = allWords;
 
-    Esportes: [
-        { word: "futebol", hint: "Gols, torcida e paixão" },
-        { word: "basquete", hint: "Cestas de três pontos" },
-        { word: "natação", hint: "Estilo livre na piscina" },
-        { word: "corrida", hint: "Vence quem chega primeiro" },
-        { word: "xadrez", hint: "Rainha e rei no tabuleiro" },
-        { word: "vôlei", hint: "Bola sobre a rede" },
-        { word: "ciclismo", hint: "Pedais e velocidade" },
-        { word: "boxe", hint: "Nocaute no ringue" },
-        { word: "ginástica", hint: "Elasticidade e precisão" },
-        { word: "surfe", hint: "Domina as ondas" }
-    ],
-    Objetos: [
-        { word: "cadeira", hint: "Onde sentamos para descansar" },
-        { word: "mesa", hint: "Onde comemos ou estudamos" },
-        { word: "celular", hint: "Na palma da mão, conecta o mundo" },
-        { word: "livro", hint: "Cheio de páginas e histórias" },
-        { word: "chave", hint: "Abre portas e tranca segredos" },
-        { word: "óculos", hint: "Ajuda a enxergar melhor" },
-        { word: "mochila", hint: "Leva tudo nas costas" },
-        { word: "espelho", hint: "Mostra quem está olhando" },
-        { word: "relógio", hint: "Mostra o tempo passando" },
-        { word: "caneta", hint: "Escreve pensamentos no papel" },
-        { word: "computador", hint: "Máquina cheia de informações" },
-        { word: "sapato", hint: "Protege os pés nas caminhadas" },
-        { word: "guarda-chuva", hint: "Companheiro fiel nos dias de chuva" },
-        { word: "travesseiro", hint: "Abraça a cabeça na hora de dormir" },
-        { word: "fone", hint: "Leva música direto aos ouvidos" },
-        { word: "toalha", hint: "Seca a água do corpo" },
-        { word: "controle", hint: "Manda na TV com um clique" },
-        { word: "sofá", hint: "Conforto na sala" },
-        { word: "escova", hint: "Organiza o cabelo ou os dentes" },
-        { word: "lanterna", hint: "Ilumina no escuro" },
-        { word: "tesoura", hint: "Corta com precisão" },
-        { word: "garrafa", hint: "Leva água pra onde você for" },
-        { word: "mouse", hint: "Aponta e clica na tela" },
-        { word: "carregador", hint: "Energia para seu aparelho" },
-        { word: "sabão", hint: "Faz espuma e limpa tudo" },
-        { word: "bola", hint: "Rola, quica e diverte" },
-        { word: "caderno", hint: "Cheio de anotações e ideias" },
-        { word: "fogão", hint: "Onde a comida é preparada" },
-        { word: "panela", hint: "Recebe os ingredientes no fogo" },
-        { word: "colher", hint: "Ajuda a levar comida à boca" },
-        { word: "ventilador", hint: "Espalha o vento nos dias quentes" },
-        { word: "tijolo", hint: "Constrói paredes e sonhos" },
-        { word: "roupa", hint: "Nos veste todos os dias" },
-        { word: "alfinete", hint: "Pequeno, mas prende com firmeza" },
-        { word: "régua", hint: "Mede e desenha retinho" },
-        { word: "abajur", hint: "Luz suave para a noite" }
-    ],
-    Comidas: [
-        { word: "pizza", hint: "Massa redonda e saborosa" },
-        { word: "lasanha", hint: "Camadas de sabor italiano" },
-        { word: "brigadeiro", hint: "Docinho de festa" },
-        { word: "sushi", hint: "Cru e enrolado com arte" },
-        { word: "hambúrguer", hint: "Clássico entre dois pães" },
-        { word: "churrasco", hint: "Carne assada na brasa" },
-        { word: "pastel", hint: "Crosta frita e recheio" },
-        { word: "coxinha", hint: "Frango em formato de gota" },
-        { word: "feijoada", hint: "Prato típico com feijão preto" },
-        { word: "bolo", hint: "Recheado e com cobertura" }
-    ],
-    Filmes: [
-        { word: "avatar", hint: "Azuis de outro planeta" },
-        { word: "titanic", hint: "Tragédia em alto-mar" },
-        { word: "matrix", hint: "Realidade ou simulação?" },
-        { word: "rocky", hint: "Lutador com coração de aço" },
-        { word: "frozen", hint: "Deixa o gelo te emocionar" },
-        { word: "interestelar", hint: "Buracos negros e tempo" },
-        { word: "vingadores", hint: "Heróis contra o mal" },
-        { word: "harry potter", hint: "Feitiços e cicatriz na testa" },
-        { word: "jurassic", hint: "Dinossauros ressuscitados" },
-        { word: "encanto", hint: "Família mágica com segredos" },
-        { word: "lilo & stitch", hint: "Alienígena travesso no Havaí" },
-        { word: "up–altas aventuras", hint: "Uma casa voadora levada por balões" },
-        { word: "os incríveis", hint: "Família de heróis com superpoderes" },
-        { word: "toy story", hint: "Brinquedos com vida" },
-        { word: "frozen", hint: "Let It Go no gelo" },
-        { word: "vida de inseto", hint: "Pequenos heróis enfrentam grandes vilões no mundo dos insetos" },
-        { word: "monstros s.a.", hint: "Sustos que geram energia" },
-        { word: "a princesa e o sapo", hint: "Um sonho, um beijo e transformação" },
-        { word: "detona ralph", hint: "Mundo dos fliperamas em caos" },
-        { word: "valente", hint: "Cabelos vermelhos e arco nas mãos" },
-        { word: "divertidamente", hint: "Várias emoções dominam o painel de controle" },
-        { word: "a pequena sereia", hint: "Sonho de viver fora do mar" },
-        { word: "peter pan", hint: "Menino que nunca cresce" },
-        { word: "hercules", hint: "Jornada de um semideus" },
-        { word: "zootopia", hint: "Uma cidade de animais e uma coelhinha policial com um caso a resolver" },
-        { word: "enrolados", hint: "Cabelos dourados e um ladrão de coração mole" },
-        { word: "lilo & stitch", hint: "Ohana significa família" },
-        { word: "minions", hint: "Pequenos, amarelos e caóticos" }
-    ],
-    Paises: [
-        { word: "brasil", hint: "Verde e amarelo no futebol" },
-        { word: "japão", hint: "Tecnologia e tradição milenar" },
-        { word: "egito", hint: "Terra das pirâmides" },
-        { word: "canadá", hint: "Neve e folha vermelha" },
-        { word: "itália", hint: "Pizza, moda e história" },
-        { word: "frança", hint: "Torre e romance" },
-        { word: "alemanha", hint: "Engenharia e salsichas" },
-        { word: "méxico", hint: "Chapéus e pimenta" },
-        { word: "china", hint: "Dragões e muralha" },
-        { word: "austrália", hint: "Cangurus e praias" }
-    ],
-    Tecnologia: [
-        { word: "internet", hint: "Conectando o mundo todo" },
-        { word: "smartphone", hint: "Celular que faz tudo" },
-        { word: "robô", hint: "Máquina com 'vida'" },
-        { word: "programa", hint: "Código que executa tarefas" },
-        { word: "nuvem", hint: "Guarda seus arquivos invisivelmente" },
-        { word: "wi-fi", hint: "Sinal mágico para navegar" },
-        { word: "teclado", hint: "Com letras e atalhos" },
-        { word: "monitor", hint: "Janela do computador" },
-        { word: "drone", hint: "Voa e filma do alto" },
-        { word: "aplicativo", hint: "Pequeno programa no celular" }
-    ],
-    Profissoes: [
-        { word: "médico", hint: "Salva vidas com jaleco" },
-        { word: "professor", hint: "Mestre do conhecimento" },
-        { word: "engenheiro", hint: "Constrói o futuro" },
-        { word: "ator", hint: "Vive mil personagens" },
-        { word: "bombeiro", hint: "Herói entre as chamas" },
-        { word: "advogado", hint: "Defensor das leis" },
-        { word: "cantor", hint: "Voz que encanta" },
-        { word: "motorista", hint: "Leva e traz com habilidade" },
-        { word: "cozinheiro", hint: "Transforma ingredientes em arte" },
-        { word: "policial", hint: "Protege e serve" }
-    ]
+let selectedCategory = null;         // 🠒 definida ao clicar num botão
+let currentWord, correctLetters = [], wrongGuessCount = 0;
+const maxGuessed = 6;
+
+/* ---------- FUNÇÕES DE JOGO ---------- */
+
+const randomNumber = (min, max)=>{
+    return Math.round(Math.random() * (max - min) + min )
+}
+
+const getRandomColor = ()=>{
+    const red = randomNumber(0, 120)
+    const green = randomNumber(0, 100)
+    const blue = randomNumber(80, 255)
+    return `rgb(${red}, ${green}, ${blue})`
+}
+
+const resetGame = () => {
+    correctLetters = [];
+    wrongGuessCount = 0;
+    hangmanImage.src = `images/hangman-${wrongGuessCount}.svg`;
+    guessesText.innerText = `${wrongGuessCount}/${maxGuessed}`;
+    KeyboardDiv.querySelectorAll("button").forEach(btn => btn.disabled = false);
+    AccentDiv.querySelectorAll("button").forEach(btn => btn.disabled = false);
+    wordDisplay.innerHTML = currentWord.split("").map(() =>
+        `<li class="letter"></li>`).join("");
+    gameModal.classList.remove("show");
 };
+
+const getRandomWord = () => {
+    const list = wordCategories[selectedCategory];
+    const { word, hint } = list[Math.floor(Math.random() * list.length)];
+    currentWord = word;
+    document.querySelector(".hint-text b").innerText = hint;
+    resetGame();
+};
+
+const gameOver = (isVictory) => {
+    setTimeout(() => {
+        const modalText = isVictory ? "Você acertou a palavra:" : "A palavra correta era:";
+        gameModal.querySelector("img").src = `images/${isVictory ? "victory" : "lost"}.gif`;
+        gameModal.querySelector("h4").innerText = isVictory ? "Parabéns!" : "Fim de jogo!";
+        gameModal.querySelector("p").innerHTML = `${modalText} <strong>${currentWord}</strong>`;
+        gameModal.classList.add("show");
+    }, 200);
+};
+
+const initGame = (button, clickedLetter) => {
+    if (currentWord.includes(clickedLetter)) {
+        [...currentWord].forEach((letter, i) => {
+            if (letter === clickedLetter) {
+                correctLetters.push(letter);
+                const li = wordDisplay.querySelectorAll("li")[i];
+                li.innerText = letter;
+                li.classList.add("guessed");
+            }
+        });
+    } else {
+        wrongGuessCount++;
+        hangmanImage.src = `images/hangman-${wrongGuessCount}.svg`;
+    }
+
+    button.disabled = true;
+    guessesText.innerText = `${wrongGuessCount}/${maxGuessed}`;
+
+    const allGuessed = [...wordDisplay.querySelectorAll("li")].every(li => li.classList.contains("guessed"));
+    if (allGuessed) return gameOver(true);
+    if (wrongGuessCount === maxGuessed) return gameOver(false);
+};
+
+
+/* ---------- CRIAÇÃO DO TECLADO NORMAL (a-z) ---------- */
+for (let i = 97; i <= 122; i++) {
+    const letter = String.fromCharCode(i);
+    const btn = document.createElement("button");
+    btn.innerText = letter;
+    btn.style.backgroundColor = getRandomColor()
+    KeyboardDiv.appendChild(btn);
+    btn.addEventListener("pointerdown", e => initGame(e.target, letter));
+}
+
+/* ---------- CRIAÇÃO DO TECLADO COM ACENTOS ---------- */
+const accentedLetters = ["á", "é", "í", "ó", "ú", "â", "ê", "ô", "ã", "õ", "ç", "-", " "];
+
+accentedLetters.forEach(letter => {
+    const btn = document.createElement("button");
+    btn.innerText = letter;
+    btn.style.backgroundColor = getRandomColor()
+    AccentDiv.appendChild(btn);
+    btn.addEventListener("pointerdown", e => initGame(e.target, letter));
+});
+
+/* ---------- EVENTOS DOS BOTÕES DE CATEGORIA ---------- */
+categoryButtons.forEach(btn => {
+    btn.addEventListener("pointerdown", () => {
+        // visual "ativo"
+        categoryButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        selectedCategory = btn.dataset.category;
+        startBtn.style.display = "inline-block";   // mostra botão iniciar
+    });
+});
+
+
+/* ---------- BOTÃO COMEÇAR JOGO ---------- */
+startBtn.addEventListener("pointerdown", () => {
+    getRandomWord();
+    startBtn.style.display = "none";
+    containerJogo.style.display = "flex"
+    menuOla.style.display = "none";
+    menuOla.style.display = "flex";
+    menuOla.innerHTML = "<p>Escolha outra categoria</p>";
+});
+
+/* ---------- BOTÃO JOGAR NOVAMENTE ---------- */
+playGame.addEventListener("pointerdown", () => {
+    getRandomWord();          // mesma categoria escolhida
+    gameModal.classList.remove("show");
+});
+
