@@ -1,67 +1,65 @@
 <!DOCTYPE html>
-<html lang="pt-BR"> <!-- Corrigido para português do Brasil -->
-<head>
+<html lang="pt-BR">
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jogo da Forca</title>
     <link rel="stylesheet" href="style.css" />
     <script src="scripts/word-list.js" defer></script>
     <script src="scripts/script.js" defer></script>
-</head>
-<body>
-    <div class="container-wrapper">
-            <!-- MENU DE CATEGORIAS -->
-            <div class="menu">
-                <div class="textoInicial">
-                    <h1>Olá,</h1><p>Escolha um tema para o Jogo iniciar!</p> 
-                </div>
-                <div id="category-buttons">
-                    <button data-category="Aleatorio" class="aleatory">Aleatório</button>
-                    <button data-category="Animais">Animais</button>
-                    <button data-category="Musica">Música</button>
-                    <button data-category="Disney">Disney</button>
-                    <button data-category="Esportes">Esportes</button>
-                    <button data-category="Objetos">Objetos</button>
-                    <button data-category="Comidas">Comidas</button>
-                    <button data-category="Filmes">Filmes</button>
-                    <button data-category="Paises">Paises</button>
-                    <button data-category="Tecnologia">Tecnologia</button>
-                    <button data-category="Profissoes">Profissões</button>
-                </div>
-                <button id="start-btn" style="display: none;">Começar Jogo</button>
-            </div>
+  </head>
+  <body>
+    <main class="container-wrapper">
+      <aside class="menu" aria-label="Menu de categorias">
+        <header class="textoInicial">
+          <h1>Olá,</h1>
+          <h2>Seja bem-vindo ao Jogo da Forca!</h2>
+          <p>Escolha um tema para o jogo iniciar!</p>
+        </header>
 
-            <!-- MODAL DE FIM DE JOGO -->
-            <div class="game-modal">
-                <div class="content">
-                <img src="./images/lost.gif" alt="Game Status" />
-                <h4>Game Over</h4>
-                <p>The correct word was: <b>rainbow</b></p>
-                <button class="play-again">Jogar Novamente</button>
-                </div>
-            </div>
+        <section class="category-buttons">
+          <button type="button" data-category="Aleatorio" class="aleatory">Aleatório</button>
+          <button type="button" data-category="Animais">Animais</button>
+          <button type="button" data-category="Musica">Música</button>
+          <button type="button" data-category="Disney">Disney</button>
+          <button type="button" data-category="Esportes">Esportes</button>
+          <button type="button" data-category="Cores">Cores</button>
+          <button type="button" data-category="Comidas">Comidas</button>
+          <button type="button" data-category="Filmes">Filmes</button>
+          <button type="button" data-category="Paises">Paises</button>
+        </section>
 
-            <!-- ÁREA PRINCIPAL DO JOGO -->
-            <div class="container">
-                <div class="hangman-box">
-                    <img src="./images/hangman-0.svg" alt="Desenho da Forca" />
-                    <h1>Jogo da Forca</h1>
-                </div>
-                <div class="game-box">
-                    <ul class="word-display"></ul>
-                    <h4 class="hint-text">
-                        Dica:
-                        <b></b>
-                    </h4>
-                    <h4 class="guesses-text">
-                        Erros:
-                        <b>0 / 6</b>
-                    </h4>
+        <button id="start-btn" hidden>Começar Jogo</button>
+      </aside>
 
-                    <div class="keyboard"></div>
-                    <div class="accent"></div>
-                    </div>
-            </div>
-    </div>
-</body>
+      <section class="container" aria-label="Área do jogo">
+        <figure class="hangman-box">
+          <img src="./images/hangman-0.svg" alt="Ilustração do jogo da forca" />
+        </figure>
+
+        <div class="game-box">
+          <ul class="word-display" aria-label="Palavra para adivinhar">
+          </ul>
+
+          <p class="hint-text">Dica: <b></b></p>
+          <p class="guesses-text">Erros: <b>0 / 6</b></p>
+
+          <div class="keyboard" aria-label="Teclado de letras">
+          </div>
+
+          <div class="accent" aria-label="Letras com acento">
+          </div>
+        </div>
+      </section>
+
+      <div class="game-modal" role="dialog" aria-modal="true">
+        <div class="content">
+          <img src="./images/lost.gif" alt="Resultado do jogo" />
+          <h4>Game Over</h4>
+          <p>A palavra correta era: <b>Arco-íris</b></p>
+          <button class="play-again" type="button">Jogar Novamente</button>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>

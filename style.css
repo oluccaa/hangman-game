@@ -1,381 +1,322 @@
-/* Importing Google font - Open Sans */
+/* Fonte e variáveis */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
 
-* {
+:root {
+    --primary: #5e63ba;
+    --hover: #8286c9;
+    --danger: #ff4d6d;
+    --danger-hover: #e93c5c;
+    --dark-blue: #232893;
+    --white: #fff;
+    --text-dark: #000;
+    }
+
+    * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
-}
+    }
 
-body {
+    body {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 10px;
-    justify-content: flex-start;
-    min-height: 100vh;
-    background: #5E63BA;
-}
-
-/* WRAPPER PARA JOGO + MENU */
-.container-wrapper {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 40px;
-    width: 100%;
-    max-width: 1200px;
-    padding: 40px 20px;
-}
+    min-height: 100vh;
+    padding: 0 20px;
+    background: var(--primary);
+    }
 
-/* MENU DE CATEGORIAS */
-.menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 20px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    height: fit-content;
-    min-width: 240px;
-}
+    /* ===================== */
+    /*     WRAPPER & LAYOUT  */
+    /* ===================== */
 
-.menu h1 {
-    font-size: 1.5rem;
-    text-align: center;
-}
-
-.menu .textoInicial{
-    display: flex;
-    flex-direction: column;
-    
-}
-
-#category-buttons {
+    .container-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* cada coluna ocupa metade do espaço */
-    gap: 10px;
-    justify-items: stretch; /* faz os itens se esticarem na célula */
+    grid-template-columns: 1fr 3fr;
+    gap: 20px;
     width: 100%;
-    max-width: 450px;
-    margin: 0 auto;
-}
+    align-items: stretch;
+    }
 
-/* Botão Aleatório ocupa a linha toda */
-#category-buttons .aleatory {
-    grid-column: 1 / -1;
-}
-
-#category-buttons button {
-    border: 2px solid #252ed2;
-    color: #232893;
+    .container {
+    display: flex;
+    flex-direction: row;
+    background: var(--white);
     padding: 15px;
-    font-size: 18px;
-}
+    gap: 10px;
+    border-radius: 12px;
+    min-height: 500px;
+    min-width: 600px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    align-items: center;
+    }
 
-#category-buttons button {
+    /* ===================== */
+    /*      MENU             */
+    /* ===================== */
+
+    .menu {
+    background: var(--white);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     width: 100%;
+    min-width: 200px;
+    }
+
+    .menu .textoInicial {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+    }
+
+    .menu h1 {
+    font-size: 1.5rem;
+    text-align: left;
+    }
+    .menu h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    text-align: left;
+    }
+
+    /* ===================== */
+    /*    CATEGORY BUTTONS   */
+    /* ===================== */
+
+    .category-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 450px;
+    width: 100%;
+    margin: 0 auto;
+    }
+
+    .category-buttons .aleatory {
+    grid-column: 1 / -1;
+    }
+
+    .category-buttons button {
     padding: 12px 24px;
     font-size: 1rem;
     font-weight: 600;
-    color: #5E63BA;
     background-color: transparent;
-    border: 2px solid #5E63BA;
+    color: var(--primary);
+    border: 2px solid var(--primary);
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 8px;
     justify-content: center;
-}
+    gap: 8px;
+    }
 
-#category-buttons button.active,
-#category-buttons button:hover {
-    background-color: #5E63BA;
-    color: #fff;
-}
+    .category-buttons button:hover,
+    .category-buttons button.active {
+    background-color: var(--primary);
+    color: var(--white);
+    }
 
-#start-btn {
-    display: inline-block;
+    #start-btn {
     padding: 10px 25px;
     font-size: 1rem;
     font-weight: bold;
-    background-color: #ff4d6d;
-    color: #fff;
+    background-color: var(--danger);
+    color: var(--white);
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    transition: background 0.3s ease;
     margin-top: 10px;
-}
+    transition: background 0.3s ease;
+    animation: pulse 2s infinite;
+    }
+    #start-btn:hover {
+    background: var(--danger-hover);
+    }
 
-#start-btn:hover {
-    background-color: #e93c5c;
-}
+    @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+    }
 
-/* CONTAINER PRINCIPAL DO JOGO */
-.container {
-    display: none;
-    flex: 1;
-    width: 100%;
-    max-width: 850px;
-    gap: 70px;
-    padding: 60px 40px;
-    background: #fff;
-    border-radius: 10px;
-    align-items: flex-end;
-    justify-content: space-between;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    min-width: 300px;
-}
+    /* ===================== */
+    /*         JOGO          */
+    /* ===================== */
 
-.hangman-box {
-    max-width: 270px;
-}
+    .hangman-box {
+    display: block;
+    max-width: 300px;
+    padding: 20px;
+    }
+    .hangman-box img {
+    width: 200px;
+    }
 
-.hangman-box h1 {
-    font-size: 1.45rem;
-    margin-top: 20px;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.word-display {
+    .word-display {
     display: flex;
-    gap: 10px;
     list-style: none;
-    align-items: center;
+    gap: 5px;
     justify-content: center;
-    margin-top: 30px;
-}
-
-.word-display .letter {
-    width: 28px;
-    font-size: 2rem;
+    align-items: center;
+    margin-bottom: 20px;
+    }
+    .word-display .letter {
+    width: 22px;
+    font-size: 1.8rem;
     font-weight: 600;
     text-align: center;
     text-transform: uppercase;
-    margin-bottom: 40px;
-    border-bottom: 3px solid #000;
-}
-
-.word-display .letter.guessed {
+    border-bottom: 3px solid var(--text-dark);
+    }
+    .word-display .letter.guessed {
     border-color: transparent;
     margin: -40px 0 35px;
-}
+    }
 
-.game-box h4 {
-    text-align: center;
+    .game-box h4 {
     font-size: 1.1rem;
     font-weight: 500;
-    margin-bottom: 15px;
-}
+    text-align: center;
+    margin-bottom: 10px;
+    }
+    .game-box .guesses-text b {
+    color: red;
+    }
 
-.game-box h4 b {
-    font-weight: 600;
-}
-
-.game-box .guesses-text b {
-    color: #ff0000;
-}
-
-.game-box .keyboard{
-    display: flex;
-    gap: 5px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.game-box .accent{
-    display: flex;
-    gap: 5px;
-    margin-top: 15px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-:where(.game-modal, .keyboard) button {
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    background-color: #5E63BA;
-    border-radius: 4px;
-    text-transform: uppercase;
-}
-
-.keyboard button {
-    padding: 7px;
-    width: calc(100% / 9 - 5px);
-}
-
-.accent button{
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    background-color: #232893;
-    border-radius: 4px;
-    text-transform: uppercase;
-    padding: 7px;
-    width: calc(100% / 9 - 5px);
-}
-
-.keyboard button[disabled] {
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-.accent button[disabled] {
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-:where(.game-modal, .keyboard, .accent) button:hover {
-    background: #8286C9;
-}
-
-.accent button:hover {
-    background: #8286C9;
-}
+/* ===================== */
+/*        MODAL          */
+/* ===================== */
 
 .game-modal {
     position: fixed;
-    left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    pointer-events: none;
-    z-index: 999;
-    display: flex;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(30, 30, 30, 0.75);
+    display: none;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.6);
-    transition: opacity 0.4s ease;
-}
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+    padding: 20px;
+    animation: fadeIn 0.2s ease-in-out;
+    }
 
-.game-modal.show {
-    opacity: 1;
-    pointer-events: auto;
-}
+    .game-modal.show{
+        display: flex;
+    }
 
-.game-modal .content {
-    background: #fff;
-    max-width: 420px;
-    width: 100%;
-    text-align: center;
-    border-radius: 10px;
+    .game-modal .content {
+    background: var(--white);
     padding: 30px;
-}
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+    width: 400px;
+    }
 
-.game-modal img {
-    max-width: 130px;
+    .game-modal img {
+    width: 120px;
     margin-bottom: 20px;
+    }
+
+    .game-modal h4 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--primary);
+    }
+
+    .game-modal p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    }
+
+    .game-modal .play-again {
+    padding: 10px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    }
+
+    .game-modal .play-again:hover {
+    background: var(--hover);
+    }
+
+    @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-.game-modal h4 {
-    font-size: 1.53rem;
-}
 
-.game-modal p {
-    font-size: 1.15rem;
-    margin: 15px 0 30px;
-    font-weight: 500;
-}
+    /* ===================== */
+    /*        TECLADO        */
+    /* ===================== */
 
-.game-modal p b {
-    color: #5E63BA;
+    .keyboard,
+    .accent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 15px;
+    }
+
+    .keyboard button,
+    .accent button {
+    padding: 7px;
+    width: calc(100% / 9 - 5px);
+    font-size: 1rem;
     font-weight: 600;
-}
-
-.game-modal button {
-    padding: 12px 23px;
-}
-
-/* RESPONSIVO */
-
-/* 2) tablets & mobiles < 915px  (empilhado) -------------- */
-@media (max-width:914px){
-    .container-wrapper{
-        flex-direction:column;
-        align-items:stretch;
-        gap:30px;
-        padding:30px 15px;
-    }
-    .container{
-        flex-direction:column;                    /* forca em cima, teclado embaixo */
-        align-items:center;
-        justify-content:flex-start;
-        gap:35px;
-        padding:40px 20px;
-    }
-    .hangman-box img{
-        max-width:220px;}
-    .hangman-box h1{
-        font-size:1.2rem;}
-
-    /* letras um pouquinho menores */
-    .word-display .letter{
-        font-size:1.6rem;
-        width:25px;}
-
-    /* botões adaptáveis */
-    .keyboard button,
-    .accent button{
-        width:calc(100% / 8 - 5px);
-        font-size:.95rem;
-    }
-}
-
-/* 3) smartphones < 600px  -------------------------------- */
-@media (max-width:600px){
-    .container{
-        padding:30px 15px;
-        gap:28px;
+    border: none;
+    color: var(--white);
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    background: var(--primary);
+    transition: 0.2s ease;
     }
 
-    #category-buttons button{
-        font-size:.95rem;
-        padding: 10px;
+    .accent button {
+    background-color: var(--dark-blue);
     }
 
-    .keyboard button,
-    .accent button{
-        width:calc(100% / 6 - 5px);
-        font-size:.85rem;}
-}
+    .keyboard button:hover,
+    .accent button:hover {
+    background: var(--hover);
+    }
 
-/* 4) smartphones muito pequenos < 360px  ----------------- */
-@media (max-width:360px){
-    .word-display .letter{
-    font-size:1.2rem;
-    width:15px;
-    margin: 20px;
-}
-    .keyboard button,
-    .accent button{
-        width:calc(100% / 5 - 5px);
-        font-size:.8rem;
-        padding:5px;
+    .keyboard button:disabled,
+    .accent button:disabled {
+    opacity: 0.6;
+    pointer-events: none;
     }
-    #start-btn{
-        width:100%;
-        font-size:.9rem;
-        padding:8px 16px;
+
+    /* ===================== */
+    /*      RESPONSIVO       */
+    /* ===================== */
+
+    @media (max-width: 900px) {
+    .container-wrapper {
+        grid-template-columns: 1fr;
     }
-    .game-modal .content{
-        padding:20px;
+
+    .container {
+        flex-direction: column;
+        min-width: 100%;
     }
 }
