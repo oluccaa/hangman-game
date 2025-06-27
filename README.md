@@ -10,7 +10,6 @@ O objetivo é oferecer uma experiência divertida, visualmente agradável e educ
   - Música
   - Disney
   - Esportes
-  - Cores
   - Comidas
   - Filmes
   - Países
